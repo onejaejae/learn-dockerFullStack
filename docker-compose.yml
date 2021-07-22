@@ -14,10 +14,10 @@ services:
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
-    # volumes:
-    #   - "/usr/src/app/node_modules"
-    #   - "./frontend:/usr/src/app"
+      dockerfile: Dockerfile.dev
+    volumes:
+      - "/usr/src/app/node_modules"
+      - "./frontend:/usr/src/app"
     stdin_open: true
     restart: always
 
