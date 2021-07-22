@@ -12,12 +12,12 @@ script:
   - docker run -e CI=true react-test-app npm run test
 
 after_success:
-  - docker build -t frontend ./frontend
-  - docker build -t backend ./backend
-  - docker build -t nginx ./nginx
+  - docker build -t magicnc7/docker-frontend ./frontend
+  - docker build -t magicnc7/docker-backend ./backend
+  - docker build -t magicnc7/docker-nginx ./nginx
 
   - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
 
-  - docker push frontend
-  - docker push backend
-  - docker push nginx
+  - docker push magicnc7/docker-frontend
+  - docker push magicnc7/docker-backend
+  - docker push magicnc7/docker-nginx
