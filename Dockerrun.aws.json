@@ -3,7 +3,7 @@
     "containerDefinitions": [
         {
             "name": "frontend",
-            "image": "magicnc7/frontend",
+            "image": "magicnc7/frontend2",
             "hostname": "frontend",
             "essential": false,
             "memory": 128
@@ -11,7 +11,7 @@
 
         {
             "name": "backend",
-            "image": "magicnc7/backend",
+            "image": "magicnc7/backend2",
             "hostname": "backend",
             "essential": false,
             "memory": 128
@@ -19,7 +19,7 @@
 
         {
             "name": "nginx",
-            "image": "magicnc7/nginx",
+            "image": "magicnc7/nginx2",
             "hostname": "nginx",
             "essential": true,
             "portMappings": [

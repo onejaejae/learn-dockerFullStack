@@ -12,15 +12,15 @@ script:
   - docker run -e CI=true react-test-app npm run test
 
 after_success:
-  - docker build -t magicnc7/frontend ./frontend
-  - docker build -t magicnc7/backend ./backend
-  - docker build -t magicnc7/nginx ./nginx
+  - docker build -t magicnc7/frontend2 ./frontend
+  - docker build -t magicnc7/backend2 ./backend
+  - docker build -t magicnc7/nginx2 ./nginx
 
   - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
 
-  - docker push magicnc7/frontend
-  - docker push magicnc7/backend
-  - docker push magicnc7/nginx
+  - docker push magicnc7/frontend2
+  - docker push magicnc7/backend2
+  - docker push magicnc7/nginx2
 
 deploy:
   provider: elasticbeanstalk

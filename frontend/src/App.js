@@ -1,32 +1,40 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import logo from "./logo.svg";
 import "./App.css";
+import axios from "axios";
 
 function App() {
-  const [List, setList] = useState([]);
-  const [Value, setValue] = useState("");
-
   useEffect(() => {
-    axios.get("/api/values").then((res) => {
-      console.log(res.data);
-      setList(res.data);
+    axios.get("/api/hi").then((response) => {
+      console.log("response", response);
     });
   }, []);
 
-  const changeHandler = (e) => {
-    setValue(e.currentTarget.value);
+  useEffect(() => {
+    //여기서 데이터베이스에 있는 값을 가져온다.
+    axios.get("/api/values").then((response) => {
+      console.log("response", response);
+      setLists(response.data);
+    });
+  }, []);
+
+  const [lists, setLists] = useState([]);
+  const [value, setValue] = useState("");
+
+  const changeHandler = (event) => {
+    setValue(event.currentTarget.value);
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
+  const submitHandler = (event) => {
+    event.preventDefault();
 
-    axios.post("/api/value", { value: Value }).then((res) => {
-      if (res.data.success) {
-        console.log(res.data);
-        setList([...List, res.data]);
+    axios.post("/api/value", { value: value }).then((response) => {
+      if (response.data.success) {
+        console.log("response", response);
+        setLists([...lists, response.data]);
+        setValue("");
       } else {
-        alert("값을 db에 넣는데 실패했습니다");
+        alert("값을 DB에 넣는데 실패했습니다.");
       }
     });
   };
@@ -36,16 +44,18 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <div className="container">
-          {List & List.map((list, index) => <li key={index}>{list.value}</li>)}
-
+          {lists &&
+            lists.map((list, index) => <li key={index}>{list.value} </li>)}
+          <br />
+          안녕하세요.
           <form className="example" onSubmit={submitHandler}>
             <input
               type="text"
-              placeholder="입력해주세요"
+              placeholder="입력해주세요..."
               onChange={changeHandler}
-              value={Value}
+              value={value}
             />
-            <button type="submit">확인</button>
+            <button type="submit">확인.</button>
           </form>
         </div>
       </header>
