@@ -24,7 +24,7 @@ function App() {
     axios.post("/api/value", { value: Value }).then((res) => {
       if (res.data.success) {
         console.log(res.data);
-        setList([...Value, res.data]);
+        setList([...List, res.data]);
       } else {
         alert("값을 db에 넣는데 실패했습니다");
       }
