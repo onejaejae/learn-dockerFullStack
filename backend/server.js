@@ -7,16 +7,16 @@ const app = express();
 
 app.use(bodyParser.json());
 
-// db.pool.query(
-//   `CREATE TABLE lists (
-//     id INTEGER AUTO_INCREMENT,
-//     value TEXT,
-//     PRIMARY KEY (id)
-// )`,
-//   (err, results) => {
-//     console.log("result: ", results);
-//   }
-// );
+db.pool.query(
+  `CREATE TABLE lists (
+    id INTEGER AUTO_INCREMENT,
+    value TEXT,
+    PRIMARY KEY (id)
+)`,
+  (err, results) => {
+    console.log("result: ", results);
+  }
+);
 
 app.get("/api/values", (req, res) => {
   db.pool.query("SELECT * FROM lists;", (err, results) => {
